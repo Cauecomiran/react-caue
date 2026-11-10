@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import './App.css'
-import axios from 'axios'
 
+import './App.css'
 import PokeAPI from './components/poke'
 import DbzAPI from './components/dbz'
+import Filme from './components/Filme'
+
 function App() {
 
 
@@ -11,6 +11,7 @@ function App() {
     <>
       <PokeAPI/>
       <DbzAPI/>
+      <Filme/>
     </>
   )
 }
