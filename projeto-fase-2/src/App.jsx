@@ -12,6 +12,8 @@ function App() {
       <PokeAPI/>
       <DbzAPI/>
       <Filme/>
+
+      oi
     </>
   )
 }
