@@ -10,7 +10,7 @@ export default function DbzAPI(){
 
             try{
                 const respDBZ = await axios.get
-                ("https://dragonball-api.com/api/characters/1")
+                ("https://dragonball-api.com/api/characters/65")
                 setDbz(respDBZ.data)
             }catch(e){
                 console.error("Erro ao busca personagem:", e)

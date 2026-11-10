@@ -8,7 +8,7 @@ export default function PokeAPI(){
     useEffect(() => {
         const getData = async() => {  
             try{
-                const respPoke = await axios.get("https://pokeapi.co/api/v2/pokemon/mawile")
+                const respPoke = await axios.get("https://pokeapi.co/api/v2/pokemon/3")
                 setPoke(respPoke.data)
             }catch(error){
                 console.error('Erro ao buscar PIKOMON: erro', error)
