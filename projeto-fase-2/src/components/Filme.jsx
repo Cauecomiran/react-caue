@@ -1,26 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
+import useBusca from "../hooks/useBusca";
 
 export default function Filme(){
+    const key = "2268ba67"
+    const {req, loading, erro} = useBusca(`https://www.omdbapi.com/?i=tt3896198&apikey=${key}`, "")
 
-    const [filme, setFilme] = useState(null)
-
-    useEffect(() =>{
-        const getData = async() => {
-            try{
-                const res = await axios.get
-                ("https://www.omdbapi.com/?i=tt3896198&apikey=2268ba67")
-
-                setFilme(res.data)
-            }catch(erro){
-                console.error("Erro ao buscar Filme: ", erro)
-            }
-        }
-
-        getData();    
-    },[])
-
-    if(!filme){
+    if(loading){
         return(
             <>
                 Carregando...
@@ -29,27 +15,27 @@ export default function Filme(){
     }
 
     return(
-        <>
+        <div className="filme">
             <h2>
                 Meu filme:
             </h2>
 
             <h3>
-                {filme.Title}
+                {req.Title}
             </h3>
 
-            <img src={filme.Poster}
+            <img src={req.Poster}
             alt=""
-            className="filme"
+            className="filme-poster"
             width="170" />
 
-            <p>Ano: {filme.Year}</p>
-            <p>Genero: {filme.Genre}</p>
-            <p>Nota IMDB: {filme.imdbRating}</p>
+            <p>Ano: {req.Year}</p>
+            <p>Genero: {req.Genre}</p>
+            <p>Nota IMDB: {req.imdbRating}</p>
             <p>
-                Premios: {filme.Awards}
+                Premios: {req.Awards}
             </p>
-        </>
+        </div>
     )
 
 

@@ -1,6 +1,6 @@
 import useBusca from "../hooks/useBusca"
 
-export default function BuscaAPI(){
+export default function PokeRandomAPI(){
     
     const{req, loading, erro} = useBusca("https://pokeapi.co/api/v2/pokemon/", "arcanine")
 
@@ -19,13 +19,13 @@ export default function BuscaAPI(){
     }
     
     return(
-        <>
+        <div>
             Nome: {req.name}
             <img src={req.sprites.other["official-artwork"].front_default}
             className="poke"
             width='180'
             alt="" />
-        </>
+        </div>
     )
 
 }

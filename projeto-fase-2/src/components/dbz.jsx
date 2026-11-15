@@ -1,50 +1,37 @@
 import { useState,useEffect } from "react";
 import axios from "axios";
+import useBusca from "../hooks/useBusca";
 
 export default function DbzAPI(){
 
-    const [dbz, setDbz] = useState(null)
+    
 
-    useEffect(() =>{
-        const getData = async() =>{
+    const {req, loading, erro} = useBusca("https://dragonball-api.com/api/characters/65", "" )
 
-            try{
-                const respDBZ = await axios.get
-                ("https://dragonball-api.com/api/characters/65")
-                setDbz(respDBZ.data)
-            }catch(e){
-                console.error("Erro ao busca personagem:", e)
-            }
-        }
+    if(loading){
+        <>carregando....</>
+    }
 
-
-        getData();
-    },[])
-
-    if(!dbz){
-        return(
-            <>
-                Carregando...
-            </>
-        )
+    if(erro){
+        console.log("Erro ao buscar dbz: erro", erro)
     }
 
     return(
-        <>
+        <div>
 
             <h2>
-                Nome: {dbz.name}
+                Nome: {req.name}
             </h2>
 
-            <img src={dbz.image} 
+            <img src={req.image} 
             className="dbz"
             width='140'/>
 
             <p>
-                Raça: {dbz.race}
+                Raça: {req.race}
             </p>
             
-        </>
+        </div>
     )
 
 

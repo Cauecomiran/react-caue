@@ -23,7 +23,7 @@ export default function useBusca(url, name ){
         }
 
         getReq()
-    },[req, name])
+    },[req])
 
     return{req, loading, erro,}
 }

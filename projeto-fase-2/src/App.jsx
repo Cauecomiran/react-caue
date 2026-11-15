@@ -3,7 +3,7 @@ import './App.css'
 import PokeAPI from './components/poke'
 import DbzAPI from './components/dbz'
 import Filme from './components/Filme'
-import BuscaAPI from './components/busca'
+import PokeRandomAPI from './components/PokemonRandom'
 import BuscarFilme from './components/BuscaFilme'
 
 
@@ -11,18 +11,25 @@ function App() {
 
 
   return(
-    <>
-      <BuscarFilme/>
+    <div>
+      
+      <div className='filme-container'>
+        <BuscarFilme/>
+        <Filme/>
+      </div>
+
+
       <DbzAPI/>
-      <Filme/>
+      
       <PokeAPI/>
-      <BuscaAPI/>
+      <PokeRandomAPI/>
+    
 
 
     
       
 
-    </>
+    </div>
   )
 }
 

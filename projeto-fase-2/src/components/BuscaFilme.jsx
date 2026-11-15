@@ -7,14 +7,10 @@ export default function BuscarFilme(){
     const [nome, setNome] = useState("")
     
     const key = "2268ba67"
-
     const {req, loading, erro} = useBusca(`https://www.omdbapi.com/?s=${nomeFilme}&apikey=${key}`, "")
-
     const resposta = req?.Search || [];
 
-     useEffect(() => {
-    
-    
+    useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
           if (nome.trim() !== '') {
             setNomeFilme(nome)
@@ -26,11 +22,11 @@ export default function BuscarFilme(){
         return () => clearTimeout(delayDebounceFn)
         }, [nome])
 
-    
-
-
     return(
         <div>
+            <h2>
+                Pesquise seu filme:
+            </h2>
            <input type="text"
            placeholder="Digite um filme..."
            className="buscarFilme"
@@ -40,11 +36,7 @@ export default function BuscarFilme(){
 
             {loading && <>Carregando...</>}
             {erro && <>Erro ao buscar...</>}
-
-            <p>
-                {nomeFilme} e tbm {key}
-            </p>
-
+        
         <ul>
             {resposta.map((res) => (
                 <li key={res.imdbID} className="list">
