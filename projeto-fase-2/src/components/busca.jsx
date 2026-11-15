@@ -1,10 +1,10 @@
-import useBusca from "./useBusca"
+import useBusca from "../hooks/useBusca"
 
 export default function BuscaAPI(){
     
-    const{req, loading, erro} = useBusca( "https://pokeapi.co/api/v2/pokemon/", 11)
+    const{req, loading, erro} = useBusca("https://pokeapi.co/api/v2/pokemon/", "arcanine")
 
-    if(loading == true){
+   if(loading == true){
         return(
             <>
                 Carregando PIKOMON

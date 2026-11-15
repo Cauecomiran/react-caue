@@ -1,69 +1,57 @@
+
 import { useState, useEffect } from "react";
-import axios from "axios"
+import useBusca from "../hooks/useBusca";
 
 export default function BuscarFilme(){
+    const [nomeFilme, setNomeFilme] = useState("")
+    const [nome, setNome] = useState("")
+    
+    const key = "2268ba67"
 
-    const [buscaFilmes, setBuscaFilme] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [busca, setBusca] = useState("")
-    const key = '2268ba67'
+    const {req, loading, erro} = useBusca(`https://www.omdbapi.com/?s=${nomeFilme}&apikey=${key}`, "")
 
-    useEffect(() => {
+    const resposta = req?.Search || [];
 
-        const getData = async() => {
-
-            setLoading(true)
-            try{
-                const respBusca = await axios.get(`https://www.omdbapi.com/?s=${busca}&apikey=${key}`)
-                const data = respBusca.data
-
-                if(data.Response === 'True'){
-                    setBuscaFilme(data.Search)
-                }else{
-                    setBuscaFilme([])
-                }
-            }catch(e){
-                console.error('Erro ao buscar filmes: erro', e)
-            }finally{
-                setLoading(false)
-            }
-
-        }
-
-        const  delayBusca = setTimeout(()=>{
-
-            if(busca.trim() !== ""){
-                getData()
-            }else{
-                setBuscaFilme([])
-            }
-
+     useEffect(() => {
+    
+    
+        const delayDebounceFn = setTimeout(() => {
+          if (nome.trim() !== '') {
+            setNomeFilme(nome)
+          }else{
+            setNomeFilme([])
+          }
         }, 800)
-        return() => clearTimeout(delayBusca)
-    },[busca])
+
+        return () => clearTimeout(delayDebounceFn)
+        }, [nome])
+
+    
+
 
     return(
         <div>
            <input type="text"
            placeholder="Digite um filme..."
            className="buscarFilme"
-           value={busca}
-           onChange={(e) => setBusca(e.target.value)}
+           value={nome}
+           onChange={(e) => setNome(e.target.value)}
            /> 
 
-            {loading && <p>Carregando...</p>}
+            {loading && <>Carregando...</>}
+            {erro && <>Erro ao buscar...</>}
 
-            <ul>
-                {buscaFilmes.map((buscaFilme)=>(
-                    <li key={buscaFilme.imdbID} className="lista">
-                        <strong>
-                            {buscaFilme.Title} || ({buscaFilme.Year})
-                        </strong>
-                    </li>
-                ))}
-            </ul>
+            <p>
+                {nomeFilme} e tbm {key}
+            </p>
+
+        <ul>
+            {resposta.map((res) => (
+                <li key={res.imdbID} className="list">
+                <strong>{res.Title}</strong> ({res.Year})
+                </li>
+            ))}
+        </ul>
         </div>
     )
-
-
 }

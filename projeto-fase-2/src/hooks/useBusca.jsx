@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useBusca(url, name, apiKey ){
+export default function useBusca(url, name ){
     const [req, setReq] = useState([])
     const [loading, setLoading] = useState(true)
     const [erro, setErro] = useState("")
+    
     
 
     useEffect(() => {
@@ -12,8 +13,9 @@ export default function useBusca(url, name, apiKey ){
         const getReq = async() => {  
             try{
                 const resp = await axios.get(`${url}${name}`)
-                setReq(resp.data)
+                setReq(resp.data) 
             }catch(error){
+                setErro(error)
                 console.error('Erro na raquisição', error)
             } finally {
                 setLoading(false)
@@ -21,9 +23,7 @@ export default function useBusca(url, name, apiKey ){
         }
 
         getReq()
-    },[])
+    },[req, name])
 
-    return{req, loading, erro}
-
-
+    return{req, loading, erro,}
 }
