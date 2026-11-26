@@ -1,35 +1,22 @@
+import {Routes, Route, BrowserRouter} from "react-router-dom"
+
+
 
 import './App.css'
-import PokeAPI from './components/poke'
-import DbzAPI from './components/dbz'
-import Filme from './components/Filme'
-import PokeRandomAPI from './components/PokemonRandom'
-import BuscarFilme from './components/BuscaFilme'
+import FilmesPage from "./pages/filmesPage"
+import PokePage from "./pages/pokePage"
+import DbzPage from "./pages/dbzPage"
 
 
 function App() {
-
-
   return(
-    <div>
-      
-      <div className='filme-container'>
-        <BuscarFilme/>
-        <Filme/>
-      </div>
-
-
-      <DbzAPI/>
-      
-      <PokeAPI/>
-      <PokeRandomAPI/>
-    
-
-
-    
-      
-
-    </div>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PokePage/>}/>
+          <Route path="/filme" element={<FilmesPage/>}/>
+          <Route path="/dbz" element={<DbzPage/>}/>
+        </Routes>
+    </BrowserRouter>
   )
 }
 

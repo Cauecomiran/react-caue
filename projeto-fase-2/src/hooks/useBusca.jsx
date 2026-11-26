@@ -16,7 +16,7 @@ export default function useBusca(url, name ){
                 setReq(resp.data) 
             }catch(error){
                 setErro(error)
-                console.error('Erro na raquisição', error)
+                console.error('Erro na requisição', error)
             } finally {
                 setLoading(false)
             }
